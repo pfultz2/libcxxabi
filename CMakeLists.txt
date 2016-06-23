@@ -18,7 +18,7 @@ if (CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
     set(LLVM_INCLUDE_DIR ${LLVM_INCLUDE_DIR} CACHE PATH "Path to llvm/include")
     set(LLVM_PATH ${LLVM_PATH} CACHE PATH "Path to LLVM source tree")
     set(LLVM_MAIN_SRC_DIR ${LLVM_PATH})
-    set(LLVM_CMAKE_PATH "${LLVM_PATH}/cmake/modules")
+    set(LLVM_CMAKE_PATH "${LLVM_PATH}/cmake/modules" CACHE PATH "Path to LLVM cmake")
   elseif(LLVM_CONFIG)
     message(STATUS "Found LLVM_CONFIG as ${LLVM_CONFIG}")
     set(CONFIG_COMMAND ${LLVM_CONFIG}
@@ -47,7 +47,7 @@ if (CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
     set(LLVM_INCLUDE_DIR ${INCLUDE_DIR} CACHE PATH "Path to llvm/include")
     set(LLVM_BINARY_DIR ${LLVM_OBJ_ROOT} CACHE PATH "Path to LLVM build tree")
     set(LLVM_MAIN_SRC_DIR ${MAIN_SRC_DIR} CACHE PATH "Path to LLVM source tree")
-    set(LLVM_CMAKE_PATH "${LLVM_BINARY_DIR}/share/llvm/cmake")
+    set(LLVM_CMAKE_PATH "${LLVM_BINARY_DIR}/share/llvm/cmake" CACHE PATH "Path to LLVM cmake")
     set(LLVM_LIT_PATH "${LLVM_PATH}/utils/lit/lit.py")
   else()
     message(FATAL_ERROR "llvm-config not found and LLVM_MAIN_SRC_DIR not defined. "
@@ -142,6 +142,7 @@ find_path(
         ${CMAKE_BINARY_DIR}/${LIBCXXABI_LIBCXX_INCLUDES}
         ${LLVM_MAIN_SRC_DIR}/projects/libcxx/include
         ${LLVM_INCLUDE_DIR}/c++/v1
+        ${CMAKE_PREFIX_PATH}/include/c++/v1
   )
 
 set(LIBCXXABI_LIBCXX_INCLUDES "${LIBCXXABI_LIBCXX_INCLUDES}" CACHE PATH
